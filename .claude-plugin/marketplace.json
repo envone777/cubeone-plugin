@@ -1,0 +1,14 @@
+{
+  "name": "cubeone",
+  "description": "큐브원(CubeOne) AI 플러그인 마켓",
+  "owner": {
+    "name": "CubeOne"
+  },
+  "plugins": [
+    {
+      "name": "cubeone-blog",
+      "source": "./plugins/cubeone-blog",
+      "description": "AI가 쓴 네이버 블로그 글을 큐브원 검수를 거쳐 임시저장 초안으로 보냅니다."
+    }
+  ]
+}

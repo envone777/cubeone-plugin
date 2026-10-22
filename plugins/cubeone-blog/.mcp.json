@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cubeone": {
+      "type": "http",
+      "url": "${CUBEONE_MCP_URL:-https://CUBEONE_HOST.invalid/api/mcp}"
+    }
+  }
+}

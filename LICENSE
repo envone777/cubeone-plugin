@@ -1,0 +1,7 @@
+TODO(PO): 라이선스를 아직 정하지 않았습니다.
+
+저장소를 공개하기 전에 PO가 라이선스를 정하고 이 파일을 실제 라이선스 본문으로 바꿉니다.
+그때 plugins/cubeone-blog/.claude-plugin/plugin.json 과 plugins/cubeone-blog/plugin.json 에
+"license" (SPDX id) 를 추가합니다.
+
+정하기 전까지는 별도 허락 없이 사용·복제·배포할 수 없습니다 (All rights reserved).

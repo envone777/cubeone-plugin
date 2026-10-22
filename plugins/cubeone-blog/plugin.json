@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "cubeone-blog",
+  "version": "0.1.0",
+  "description": "AI가 쓴 네이버 블로그 글을 큐브원 검수를 거쳐 임시저장 초안으로 보냅니다.",
+  "author": {
+    "name": "CubeOne"
+  },
+  "repository": "https://github.com/envone777/cubeone-plugin",
+  "keywords": ["naver", "blog", "mcp", "cubeone"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "큐브원 블로그",
+        "shortDescription": "네이버 블로그 초안을 큐브원 검수와 함께 보냅니다",
+        "developerName": "CubeOne",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"]
+      }
+    }
+  }
+}

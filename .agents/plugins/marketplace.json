@@ -1,0 +1,20 @@
+{
+  "name": "cubeone",
+  "interface": {
+    "displayName": "CubeOne"
+  },
+  "plugins": [
+    {
+      "name": "cubeone-blog",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cubeone-blog"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
