@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "cubeone-blog",
+      "name": "cubeone",
       "source": {
         "source": "local",
-        "path": "./plugins/cubeone-blog"
+        "path": "./plugins/cubeone"
       },
       "policy": {
         "installation": "AVAILABLE",

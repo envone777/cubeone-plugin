@@ -1,0 +1,22 @@
+{
+  "name": "cubeone",
+  "version": "0.2.0",
+  "description": "AI 채팅에서 네이버 블로그 글을 쓰고, 큐브원 검수를 거쳐 임시저장 초안으로 보냅니다.",
+  "author": {
+    "name": "CubeOne"
+  },
+  "homepage": "https://github.com/envone777/cubeone-plugin",
+  "repository": "https://github.com/envone777/cubeone-plugin",
+  "keywords": ["naver", "blog", "mcp", "cubeone"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "큐브원",
+    "shortDescription": "네이버 블로그 글을 쓰고 임시저장 초안으로 보냅니다",
+    "longDescription": "AI 채팅에서 네이버 블로그 글을 쓰고, 큐브원 검수를 거쳐 임시저장 초안으로 보냅니다.",
+    "developerName": "CubeOne",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["보험 블로그 글 써 줘"]
+  }
+}

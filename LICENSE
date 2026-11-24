@@ -1,7 +1,7 @@
-TODO(PO): 라이선스를 아직 정하지 않았습니다.
+Copyright (c) 2026 CubeOne. All rights reserved.
 
-저장소를 공개하기 전에 PO가 라이선스를 정하고 이 파일을 실제 라이선스 본문으로 바꿉니다.
-그때 plugins/cubeone-blog/.claude-plugin/plugin.json 과 plugins/cubeone-blog/plugin.json 에
-"license" (SPDX id) 를 추가합니다.
+이 저장소는 큐브원 사용자가 AI 앱에 큐브원 플러그인을 설치할 수 있도록 공개되어 있습니다.
+설치해서 쓰는 것 외의 복제·수정·재배포는 별도 허락이 필요합니다.
 
-정하기 전까지는 별도 허락 없이 사용·복제·배포할 수 없습니다 (All rights reserved).
+This repository is public so that CubeOne users can install the CubeOne plugin in their AI apps.
+Copying, modifying or redistributing it beyond installing and using it requires permission.

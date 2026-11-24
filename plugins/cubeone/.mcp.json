@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cubeone": {
+      "type": "http",
+      "url": "https://insurance-portal-git-feat-n-84335b-bizmaster0111-5246s-projects.vercel.app/api/mcp"
+    }
+  }
+}

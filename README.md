@@ -1,89 +1,69 @@
 # 큐브원 AI 플러그인 (cubeone-plugin)
 
-큐브원(CubeOne)을 AI(Claude Code, Codex)에 연결하는 플러그인 마켓입니다.
-AI가 쓴 네이버 블로그 글을 큐브원 검수를 거쳐 **임시저장 초안**으로 보냅니다.
+큐브원(CubeOne)을 AI 앱(ChatGPT 데스크톱 앱의 Codex, Claude 데스크톱 앱·Claude Code)에 연결하는 플러그인입니다.
+AI 채팅에서 네이버 블로그 글을 쓰면 큐브원 검수를 거쳐 **임시저장 초안**으로 보냅니다.
 
-- 마켓 이름: `cubeone`
-- 플러그인 이름: `cubeone-blog` (설치 id `cubeone-blog@cubeone`)
-- 이 저장소에는 서버 코드가 없습니다. MCP 서버 주소와 스킬만 담은 설정 묶음입니다. 실제 MCP 서버는 큐브원 웹 앱입니다.
-- 비밀 값(토큰, 사용자별 주소)은 들어 있지 않습니다. 사용자 인증은 연결할 때 브라우저 승인(OAuth)으로 합니다.
-- 글쓰기 규칙은 서버(`get_writing_guide`)가 줍니다. 이 저장소에는 없습니다.
+- 마켓 이름 `cubeone`, 플러그인 이름 `cubeone` (설치 id `cubeone@cubeone`)
+- 들어 있는 것: MCP 서버 `cubeone` 주소와 사용 스킬 하나. 서버 코드·비밀 값(토큰, 사용자별 주소)은 없습니다.
+- 사용자 인증은 처음 쓸 때 브라우저 승인(OAuth)으로 합니다. 큐브원 확장이 설치된 크롬에서 「허용」을 누르면 됩니다.
+- 글쓰기 규칙의 원본은 서버(`get_writing_guide`)입니다.
 
-> **현재 상태:** 공개 서버 주소가 아직 정해지지 않았습니다. 주소는 자리표시자 `https://CUBEONE_HOST.invalid/api/mcp` 입니다(`.invalid`는 실제로 연결되지 않는 예약 도메인). 서버와 OAuth가 배포되면 실제 주소로 바꿉니다.
+> **MCP 주소:** 지금은 베타 주소 `https://insurance-portal-git-feat-n-84335b-bizmaster0111-5246s-projects.vercel.app/api/mcp` 입니다.
+> 정식 출시 때 `https://cube1.kr/api/mcp` 로 바꾸고 버전을 올립니다 (`plugins/cubeone/.mcp.json`, `plugins/cubeone/mcp.json`).
+
+## 설치
+
+ChatGPT 데스크톱 앱(Codex)
+
+```bash
+codex plugin marketplace add envone777/cubeone-plugin
+codex plugin add cubeone@cubeone
+```
+
+Claude 데스크톱 앱 · Claude Code
+
+```bash
+claude plugin marketplace add envone777/cubeone-plugin
+claude plugin install cubeone@cubeone
+```
+
+설치한 뒤 플러그인을 다시 불러오거나(Claude Code `/reload-plugins`) 새 대화를 열고 "큐브원 연결 확인해 줘"라고 말하세요.
+실제 고객용 설정 문장은 큐브원 웹의 「AI 연결」 화면에서 복사합니다.
 
 ## 구성
 
 ```
-.claude-plugin/marketplace.json        # Claude Code 마켓 (Codex도 호환 형식으로 읽음)
+.claude-plugin/marketplace.json        # Claude Code 마켓 (Codex도 읽음)
 .agents/plugins/marketplace.json       # Codex 마켓
-plugins/cubeone-blog/
+plugins/cubeone/
+  .codex-plugin/plugin.json            # Codex 매니페스트 (skills, mcpServers)
   .claude-plugin/plugin.json           # Claude Code 매니페스트
-  plugin.json                          # Codex(이식형) 매니페스트
-  .mcp.json                            # Claude Code MCP 설정 (type: http)
-  mcp.json                             # Codex MCP 설정 (streamable-http + OAuth)
-  skills/cubeone-blog/SKILL.md         # 도구 사용 순서와 규칙
+  plugin.json                          # 이식형 매니페스트 (agent-plugins.org)
+  .mcp.json                            # MCP 서버 (type: http) — Claude Code·Codex 공통
+  mcp.json                             # 이식형 MCP 설정 (streamable-http + OAuth)
+  skills/cubeone/SKILL.md              # 사용 순서와 말투
 ```
-
-## 설정 프롬프트
-
-AI에 아래 프롬프트를 그대로 붙여 넣으세요.
-
-### Codex
-
-```
-큐브원 블로그를 연결해 줘.
-1. 플러그인을 설치해: `codex plugin marketplace add envone777/cubeone-plugin` 다음 `codex plugin add cubeone-blog@cubeone`
-2. 플러그인을 다시 불러오거나, 안 되면 세션을 다시 시작하라고 알려 줘.
-3. check_connection 을 호출해. 브라우저에 승인 화면이 열리면 「허용」을 누르라고 안내해 줘.
-4. 연결 상태(확장 프로그램 연결, 네이버 로그인)를 보여 줘.
-5. 끝나면 끝났다고 말해 줘.
-```
-
-### Claude Code
-
-```
-큐브원 블로그를 연결해 줘.
-1. 플러그인을 설치해: `claude plugin marketplace add envone777/cubeone-plugin` 다음 `claude plugin install cubeone-blog@cubeone`
-2. 이 세션에서 `/reload-plugins` 를 입력하라고 알려 줘(안 되면 Claude Code를 다시 시작).
-3. check_connection 을 호출해. 브라우저에 승인 화면이 열리면 「허용」을 누르라고 안내해 줘.
-4. 연결 상태(확장 프로그램 연결, 네이버 로그인)를 보여 줘.
-5. 끝나면 끝났다고 말해 줘.
-```
-
-참고
-- `codex plugin add` 는 Codex CLI 0.163.0 의 `codex plugin --help` 에 있는 명령입니다. 공식 문서 페이지는 아직 `codex plugin marketplace add` 와 앱 안 `/plugins` 설치만 설명합니다. 명령이 없는 버전이면 Codex에서 `/plugins` 를 열어 `cubeone-blog` 를 설치하세요.
-- 저장소가 비공개인 동안에는 `owner/repo` 설치가 저장소 접근 권한이 있는 계정에서만 됩니다.
 
 ## 업데이트
 
-- Claude Code: `claude plugin update cubeone-blog@cubeone`
+- Claude Code: `claude plugin update cubeone@cubeone`
 - Codex: `codex plugin marketplace upgrade cubeone`
 
-## 로컬에서 시험하기 (개발자용)
+## 개발자용
 
-로컬 큐브원 서버(`http://127.0.0.1:3000/api/mcp`)로 시험할 때만 씁니다. 배포되는 기본값은 바꾸지 않습니다.
+- 매니페스트 4개(`.codex-plugin`, `.claude-plugin`, `plugin.json`, 마켓 2개)의 이름·버전·주소를 항상 같게 유지합니다.
+- 로컬 서버로 시험할 때는 플러그인 주소를 바꾸지 말고 별도 이름으로 추가합니다: `codex mcp add cubeone-dev --url http://127.0.0.1:3000/api/mcp` 또는 `claude mcp add --transport http cubeone-dev http://127.0.0.1:3000/api/mcp`.
+- 사용자별 비밀 주소(`/api/mcp/<secret>`), 토큰, 네이버 아이디는 이 저장소·이슈·스크린샷 어디에도 넣지 마세요. 이 저장소는 공개입니다.
 
-**Claude Code** — `.mcp.json` 주소는 환경 변수 `CUBEONE_MCP_URL` 로 덮어쓸 수 있습니다(`${VAR:-기본값}` 확장).
+---
 
-```bash
-claude plugin marketplace add /path/to/cubeone-plugin
-claude plugin install cubeone-blog@cubeone
-CUBEONE_MCP_URL=http://127.0.0.1:3000/api/mcp claude
-```
+## English
 
-**Codex** — `mcp.json` 에는 환경 변수 덮어쓰기가 문서화되어 있지 않습니다. 플러그인은 스킬용으로 설치하고, 로컬 서버는 별도 이름으로 추가합니다.
+CubeOne plugin for Codex (ChatGPT desktop app) and Claude Code / Claude desktop. It bundles the `cubeone` MCP server (OAuth, no secrets) and one short skill; it writes Naver blog posts from the AI chat and sends them to CubeOne, which saves them as **drafts** (never published).
 
 ```bash
-codex plugin marketplace add /path/to/cubeone-plugin
-codex plugin add cubeone-blog@cubeone
-codex mcp add cubeone-dev --url http://127.0.0.1:3000/api/mcp
-codex mcp login cubeone-dev
+codex plugin marketplace add envone777/cubeone-plugin && codex plugin add cubeone@cubeone
+claude plugin marketplace add envone777/cubeone-plugin && claude plugin install cubeone@cubeone
 ```
 
-주의
-- 개발용 사용자별 비밀 MCP 주소(`/api/mcp/<secret>`)는 이 저장소, 이슈, 스크린샷 어디에도 넣지 마세요.
-- `localhost` 주소를 기본값으로 커밋하지 마세요.
-
-## 라이선스
-
-정해지지 않았습니다. `LICENSE` 를 보세요.
+The MCP URL is currently the beta deployment; at launch it moves to `https://cube1.kr/api/mcp`. All rights reserved (see `LICENSE`).
